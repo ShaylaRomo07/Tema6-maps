@@ -18,6 +18,6 @@ public class Main {
         for (User user : users) {
             usersByNif = put(user);
         }
-        List<String> phoneNumbers = getPhones(usersByNif);
+
     }
 }
