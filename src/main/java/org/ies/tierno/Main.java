@@ -10,15 +10,16 @@ public class Main {
                 new User("24552G", "Luis", "Fernandez", "5845745", "chefpringao@gmail.com", 19),
                 new User("55216H", "Peppa", "Pig", "90251", "qloq@gmail.com", 19)
         };
-        Map<String, User> usersByNif = put(users);
+        Map<String, User> usersByNif = new HashMap<>();
+        for (User user : users) {
+            usersByNif = put(user);
+        }
         String phoneNumber = getPhoneByNif(usersByNif, "55216H");
     }
 
-    public static Map<String, User> put(User[] users) {
+    public static Map<String, User> put(User user) {
         Map<String, User> usersByNif = new HashMap<>();
-        for (User user : users) {
-            usersByNif.put(user.getNif(), user);
-        }
+        usersByNif.put(user.getNif(), user);
         return usersByNif;
     }
 
