@@ -16,7 +16,7 @@ public class Main {
         for (User user : users) {
             usersByNif = put(user);
         }
-        String phoneNumber = getPhoneByNif(usersByNif, "55216H");
+        List<String> phoneNumbers= getPhones(usersByNif);
     }
 
     public static Map<String, User> put(User user) {
@@ -34,10 +34,32 @@ public class Main {
     }
 
     public static List<String> getPhones(Map<String, User> usersByNif) {
-        List<String> numbersPhones = new ArrayList<>();
+        List<String> phoneNumbers= new ArrayList<>();
         for (User user : usersByNif.values()) {
-            numbersPhones.add(getPhoneByNif(usersByNif, user.getNif()));
+            phoneNumbers.add(getPhoneByNif(usersByNif, user.getNif()));
         }
-        return numbersPhones;
+        return phoneNumbers;
+    }
+
+    public static void eliminateUser(Map<String, User> usersByNif, String nif){
+        if (usersByNif.containsKey(nif)) {
+            usersByNif.remove(nif);
+            System.out.println("Eliminacion completa");
+        }else{
+            System.out.println("No existe este usuario");
+        }
+    }
+    public static List<String> getNifs(Map<String, User> usersByNif){
+        List<String> nifs=new ArrayList<>();
+        for(String nif: usersByNif.keySet()){
+            nifs.add(nif);
+        }
+        return nifs;
+    }
+    public static void changePhoneNumber(Map<String, User> usersByNif, String nif,String phoneNumber){
+        if (usersByNif.containsKey(nif)){
+            User user=usersByNif.get(nif);
+            user.setPhoneNumber(phoneNumber);
+        }
     }
 }
