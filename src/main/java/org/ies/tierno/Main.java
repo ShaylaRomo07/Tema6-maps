@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.ies.tierno.Ej1.put;
+import static org.ies.tierno.Ej3.getPhones;
+
 public class Main {
     public static void main(String[] args) {
         User[] users = {
@@ -16,50 +19,6 @@ public class Main {
         for (User user : users) {
             usersByNif = put(user);
         }
-        List<String> phoneNumbers= getPhones(usersByNif);
-    }
-
-    public static Map<String, User> put(User user) {
-        Map<String, User> usersByNif = new HashMap<>();
-        usersByNif.put(user.getNif(), user);
-        return usersByNif;
-    }
-
-    public static String getPhoneByNif(Map<String, User> usersByNif, String nif) {
-        if (usersByNif.containsKey(nif)) {
-            User user = usersByNif.get(nif);
-            return user.getPhoneNumber();
-        }
-        return null;
-    }
-
-    public static List<String> getPhones(Map<String, User> usersByNif) {
-        List<String> phoneNumbers= new ArrayList<>();
-        for (User user : usersByNif.values()) {
-            phoneNumbers.add(getPhoneByNif(usersByNif, user.getNif()));
-        }
-        return phoneNumbers;
-    }
-
-    public static void eliminateUser(Map<String, User> usersByNif, String nif){
-        if (usersByNif.containsKey(nif)) {
-            usersByNif.remove(nif);
-            System.out.println("Eliminacion completa");
-        }else{
-            System.out.println("No existe este usuario");
-        }
-    }
-    public static List<String> getNifs(Map<String, User> usersByNif){
-        List<String> nifs=new ArrayList<>();
-        for(String nif: usersByNif.keySet()){
-            nifs.add(nif);
-        }
-        return nifs;
-    }
-    public static void changePhoneNumber(Map<String, User> usersByNif, String nif,String phoneNumber){
-        if (usersByNif.containsKey(nif)){
-            User user=usersByNif.get(nif);
-            user.setPhoneNumber(phoneNumber);
-        }
+        List<String> phoneNumbers = getPhones(usersByNif);
     }
 }
