@@ -1,6 +1,8 @@
 package org.ies.tierno;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -26,9 +28,16 @@ public class Main {
     public static String getPhoneByNif(Map<String, User> usersByNif, String nif) {
         if (usersByNif.containsKey(nif)) {
             User user = usersByNif.get(nif);
-            System.out.println(user.getPhoneNumber());
             return user.getPhoneNumber();
         }
         return null;
+    }
+
+    public static List<String> getPhones(Map<String, User> usersByNif) {
+        List<String> numbersPhones = new ArrayList<>();
+        for (User user : usersByNif.values()) {
+            numbersPhones.add(getPhoneByNif(usersByNif, user.getNif()));
+        }
+        return numbersPhones;
     }
 }
